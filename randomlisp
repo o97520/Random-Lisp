@@ -1,0 +1,196 @@
+(cons 'a (cons 'b (cons 'c (cons 'd (cons 'd (cons 'd (cons 'd 'a)))))) )
+(dotted-pair-p(cons 'd 'a))
+
+
+(cadr (cons 'a (cons 'b (cons 'c (cons 'd (cons 'd (cons 'd (cons 'd ())))))) ))
+
+
+(cdadr(list '( 'a 'a 'a)  '('b 'b 'b )))
+
+(cdr(car(cdr(list '( 'a 'a 'a)  '('b 'b 'b )))))
+
+
+
+(car '((a b c d )(f g t)))
+
+
+(cons 2 nil)
+
+
+(= (length (cons 2 3)) 2)
+
+(cddadr'((peas carrots tomatoes) (pork beef chicken) duck))
+
+(defparameter %A% 6/4)
+(defun f(n v c ) (cons n (cons v (cons c (cons %A% 10)))))
+(f 2 3 4 )
+%A%
+
+(defparameter *nodes* '(
+    (living-room (you are in the living-room.
+a wizard is snoring loudly on the couch.))
+
+(garden (you are in a beautiful garden.
+there is a well in front of you.))
+
+(attic (you are in the attic.
+there is a giant welding torch in the corner.))))
+
+
+(defun describe-location (location nodes)
+(cadr (assoc location nodes)))
+
+
+(cadr '(GARDEN (YOU ARE IN A BEAUTIFUL GARDEN. THERE IS A WELL IN FRONT OF YOU.)))
+
+(describe-location 'garden *nodes*)
+
+
+
+
+(defvar *A* 30)
+(defparameter *B* 20)
+
+(defun c(n) (setf *A* n))
+
+(c 3)
+*A*
+
+
+
+(defparameter *edges* '((living-room (garden west door)
+(attic upstairs ladder))
+(garden (living-room east door))
+(attic (living-room downstairs ladder))))
+
+
+
+
+(defun describe-path (edge)
+`(there is a ,(caddr edge) going ,(cadr edge) from here.))
+
+(describe-path '(garden west door))
+
+
+
+
+(defun describe-paths (location edges) 
+(apply #'append (mapcar #'describe-path (cdr (assoc location edges)))))
+
+
+( cdr (assoc  'living-room *edges*))
+
+
+
+
+
+
+'(garden west door)
+
+(car '(a b b))
+(cdr '(a b b))
+
+
+(mapcar #'sqrt '(1 2 3 4 5))
+
+(mapcar #'car          '((foo bar) (baz qux)))
+(mapcar (function car) '((foo bar) (baz qux)))
+
+
+(defun f(n) (eq 5 n))
+
+(if (find-if #'oddp '(2 4 5 6))
+'there-is-an-odd-number
+'there-is-no-odd-number)
+
+
+(let ((car "Honda Civic"))
+(mapcar #'car '((foo bar) (baz qux))))
+
+
+(append '(mary had) '(2) '(little lamb))
+
+(apply #'append '((THERE IS A DOOR GOING WEST FROM HERE.)
+(THERE IS A LADDER GOING UPSTAIRS FROM HERE.)))
+
+
+
+(defun path (edge)
+`(there is a ,edge going  here.))
+(path 'aa)
+
+
+
+
+(print 'hibwqkjf)
+
+
+
+
+ (if (oddp 5)
+ (progn (defun z(n) (+ n 5))
+ 'odd-number)
+ 'even-number)
+
+((defun say-hello ()
+(print "Please type your name:")
+(let ((name (read)))
+(prin1 "Nice to meet you, ")
+(prin1 name))))
+
+(SAY-HELLO)
+
+(princ #\a)
+
+(defun say-hello ()
+(princ "Please type your name:")
+(let ((name (read-line)))
+(prin1 "Nice to meet you, ")
+(prin1 name)))
+
+
+(eval '(+ 1 2))
+
+(defun game-repl ()
+ (loop (print (eval (read)))))
+
+(game-repl)
+
+(defun game-repl2 ()
+ (loop (print (eval (read)))))
+
+(game-repl2)
+
+
+(game-read)
+
+(defun game-read ()
+(let ((cmd (read-from-string
+(concatenate 'string "(" (read-line) ")"))))
+(flet ((quote-it (x)
+(list 'quote x)))
+(cons (car cmd) (mapcar #'quote-it (cdr cmd))))))
+
+
+(concatenate 'string "(" (read-line) ")")
+
+
+
+
+
+(defparameter *allowed-commands* '(look walk pickup inventory))
+
+(defun game-eval (sexp)
+(if (member (car sexp) *allowed-commands*)
+(eval sexp)
+(i do not know that command.)))
+
+
+
+
+(defun game-repl ()
+(let ((cmd (game-read)))
+(unless (eq (car cmd) 'quit)
+(game-print (game-eval cmd))
+(game-repl))))
+
